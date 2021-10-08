@@ -28,8 +28,9 @@ module.exports = {
 
 	// required if using webpack-dev-server
 	devServer: {
-		// contentBase: './dist',
 		static: path.join(__dirname, 'dist'),
 		port: 3001,
+		historyApiFallback: true,
+		hot: true,
 	},
 }
