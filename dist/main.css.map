@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","mappings":"AAAA,GACC,U","sources":["webpack://redux-bg/./src/styles/global.scss"],"sourcesContent":["h1 {\n\tcolor: red;\n}\n"],"names":[],"sourceRoot":""}

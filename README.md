@@ -1,4 +1,3 @@
 # redux-bg
 
-This is a basic Webpack 5 and Redux sample project, for testing and learning.
-Handy to have beginner files.
+This is a React, Redux, Webpack 5 crypto project, for testing and learning.
