@@ -24,19 +24,13 @@ if (process.env.SERVE) {
 	plugins.push(new ReactRefreshWebpackPlugin())
 }
 
-// const mode = process.env.NODE_ENV || 'development'
-
 module.exports = {
-	// mode defaults to 'production' if not set
 	mode: mode,
 	target: target,
 
 	// entry not required if using `src/index.js` default
-	// output not required if using `dist/main.js` default
-	// output: {
-	// 	path: path.resolve(__dirname, 'dist'),
-	// },
 
+	// output not required if using `dist/main.js` default
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		assetModuleFilename: 'assets/[name].[hash:6][ext][query]',
@@ -72,6 +66,25 @@ module.exports = {
 					'css-loader',
 					'postcss-loader',
 					'sass-loader',
+				],
+			},
+			{
+				test: /\.less$/i,
+				use: [
+					{
+						loader: 'style-loader',
+					},
+					{
+						loader: 'css-loader',
+					},
+					{
+						loader: 'less-loader',
+						options: {
+							lessOptions: {
+								javascriptEnabled: true,
+							},
+						},
+					},
 				],
 			},
 			{
