@@ -1,41 +1,27 @@
 const path = require('path')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
-let mode = 'development'
-let target = 'web'
-
 const plugins = [
+	// new CleanWebpackPlugin(),
 	new MiniCssExtractPlugin(),
 	new HtmlWebpackPlugin({
 		template: './src/index.html',
-		// favicon: './src/assets/favicon-32x32.png',
+		favicon: './src/assets/favicon-32x32.png',
 	}),
 	new Dotenv(),
 ]
-
-if (process.env.NODE_ENV === 'production') {
-	mode = 'production'
-	// target = 'browserslist'
-}
 
 if (process.env.SERVE) {
 	plugins.push(new ReactRefreshWebpackPlugin())
 }
 
 module.exports = {
-	mode: mode,
-	target: target,
-
-	// entry not required if using `src/index.js` default
-
-	// output not required if using `dist/main.js` default
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		assetModuleFilename: 'assets/[name].[hash:6][ext][query]',
-		clean: true,
-	},
+	// entry: path.resolve(__dirname, 'src', 'index.js'),
+	entry: ['babel-polyfill', './src/index.js'],
 
 	resolve: {
 		extensions: ['.js', '.jsx'],
@@ -62,6 +48,7 @@ module.exports = {
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
+						options: { publicPath: '' },
 					},
 					'css-loader',
 					'postcss-loader',
@@ -69,29 +56,9 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.less$/i,
-				use: [
-					{
-						loader: 'style-loader',
-					},
-					{
-						loader: 'css-loader',
-					},
-					{
-						loader: 'less-loader',
-						options: {
-							lessOptions: {
-								javascriptEnabled: true,
-							},
-						},
-					},
-				],
-			},
-			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: {
-					// without additional settings, this will reference .babelrc
 					loader: 'babel-loader',
 				},
 			},
@@ -101,12 +68,4 @@ module.exports = {
 	plugins: plugins,
 
 	devtool: 'source-map',
-
-	// required if using webpack-dev-server
-	devServer: {
-		static: path.join(__dirname, 'dist'),
-		port: 3001,
-		historyApiFallback: true,
-		hot: true,
-	},
 }

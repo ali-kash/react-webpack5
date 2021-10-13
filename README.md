@@ -1,3 +1,3 @@
-# redux-bg
+# react-webpack-boilerplate
 
-This is a React, Redux, Webpack 5 crypto project, for testing and learning.
+This is a React, Webpack 5 boilerplate, for testing and learning.
