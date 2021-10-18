@@ -10,11 +10,10 @@ const routes = [{ path: '/', name: 'Home', Component: Homepage }]
 const App = () => {
 	return (
 		<div className='app'>
-			<div className='navbar'>
-				<Navbar />
-			</div>
-			<div className='main'>
-				<div className='routes'>
+			<Navbar />
+
+			<div className='container'>
+				<div className='main'>
 					<Switch>
 						{routes.map(({ path, Component }, i) => (
 							<Route key={i} path={path} exact>
